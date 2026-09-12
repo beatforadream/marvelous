@@ -238,9 +238,20 @@
   .universo-item:hover .universo-live{ opacity:.6; }
   .universo-title{ font-weight:700; font-size:18px; letter-spacing:-0.02em; line-height:1.05; margin:0; overflow-wrap:break-word; }
   .universo-desc{ font-family:var(--font-mono); font-size:10px; line-height:1.4; color:var(--white-60); margin-top:8px; max-height:0; opacity:0; overflow:hidden; transition:all .5s; }
-  .universo-item:hover .universo-desc{ max-height:60px; opacity:1; }
+  .universo-item:hover .universo-desc{ max-height:100px; opacity:1; }
   .universo-line{ margin-top:12px; height:1px; width:0; background:var(--white-30); transition:width .7s; }
   .universo-item:hover .universo-line{ width:100%; }
+
+  /* fila de enlaces (redes sociales / sitio) dentro de cada tarjeta */
+  .universo-links{ display:flex; flex-wrap:wrap; gap:6px; margin-top:0; max-height:0; opacity:0; overflow:hidden; transition:all .5s; position:relative; z-index:3; }
+  .universo-item:hover .universo-links{ max-height:80px; opacity:1; margin-top:10px; }
+  .universo-links a{
+    font-family:var(--font-mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--white-80,var(--white-70)); border:1px solid var(--white-25); padding:5px 9px;
+    background:rgba(0,0,0,0.25); backdrop-filter:blur(2px);
+    transition:background-color .2s, color .2s, border-color .2s;
+  }
+  .universo-links a:hover{ background:var(--color-white); color:var(--color-black); border-color:var(--color-white); }
 
   /* ficha "próximamente" para huecos vacíos del grid (ej. Marvelous Music) */
   .universo-item.universo-soon{
@@ -806,18 +817,60 @@
     //  que apunta a los archivos reales dentro de /images)
     // ----------------------------------------------------
     var MUSIC_PROJECTS = [
-      { img:"thegeco", title:"THEGECO",           tag:"PROYECTO PERSONAL", desc:"House, techno, trance, chill-out y D&B con la curación y producción personal de Gerardo Ventura." },
-      { img:"waves",   title:"MARVELOUS WAVES MUSIC", tag:"SELLO",         desc:"Una marca que representa todo nuestro catálogo musical, un acompañamiento para quienes necesitan un respaldo rápido y leal." },
-      { img:"sonorest",title:"SONOREST",          tag:"AMBIENT",           desc:"Sonidos para descansar. Ambient, binaural y paisajes sonoros para descansar y concentrarte." },
-      { img:"tsuki",   title:"TSUKI LOFI CAFÉ",   tag:"LO-FI",             desc:"Un momento para focalizarse. Chill-hop y lo-fi para estudiar, leer o desconectar." },
-      { img:"navidad", title:"SONIDOS DE NAVIDAD",tag:"ESTACIONAL",        desc:"El espíritu hecho música. Ambiente navideño con raíz latinoamericana, todo el año." }
+      { img:"thegeco", title:"THEGECO",           tag:"PROYECTO PERSONAL", desc:"House, techno, trance, chill-out y D&B con la curación y producción personal de Gerardo Ventura.",
+        links:[
+          { label:"YouTube",    url:"https://www.youtube.com/@TheGeco_sv" },
+          { label:"Spotify",    url:"https://open.spotify.com/intl-es/artist/5FYeZ4BGcVdWVZDaGrYHbH" },
+          { label:"Instagram",  url:"https://instagram.com/thegeco_sv" },
+          { label:"TikTok",     url:"https://tiktok.com/@thegeco" },
+          { label:"SoundCloud", url:"https://soundcloud.com/thegeco" }
+        ]
+      },
+      { img:"waves",   title:"MARVELOUS WAVES MUSIC", tag:"SELLO",         desc:"Una marca que representa todo nuestro catálogo musical, un acompañamiento para quienes necesitan un respaldo rápido y leal.",
+        links:[
+          { label:"TikTok", url:"https://www.tiktok.com/@marvelouswavesmusic" }
+        ]
+      },
+      { img:"sonorest",title:"SONOREST",          tag:"AMBIENT",           desc:"Sonidos para descansar. Ambient, binaural y paisajes sonoros para descansar y concentrarte.",
+        links:[
+          { label:"YouTube",    url:"https://www.youtube.com/@Sonorest" },
+          { label:"SoundCloud", url:"https://soundcloud.com/sonorest" }
+        ]
+      },
+      { img:"tsuki",   title:"TSUKI LOFI CAFÉ",   tag:"LO-FI",             desc:"Un momento para focalizarse. Chill-hop y lo-fi para estudiar, leer o desconectar.",
+        links:[
+          { label:"YouTube", url:"https://www.youtube.com/@TsukiLofiCafe" }
+        ]
+      },
+      { img:"navidad", title:"SONIDOS DE NAVIDAD",tag:"ESTACIONAL",        desc:"El espíritu hecho música. Ambiente navideño con raíz latinoamericana, todo el año.",
+        links:[
+          { label:"YouTube", url:"https://www.youtube.com/@SonidosdeNavidad-latam" }
+        ]
+      }
     ];
 
     var EDITORIAL_PROJECTS = [
-      { img:"mundo",      title:"MUNDO MAGAZINE",             tag:"MISTERIO · CIENCIA",  desc:"Misterio, ciencia, investigación, ufología y documentos, con el espíritu de las revistas impresas de los 90s a 2000s." },
-      { img:"signal",     title:"SIGNAL MAGAZINE",            tag:"IA GENERATIVA",       desc:"Artículos, perfiles y artefactos sobre IA generativa." },
-      { img:"stems",      title:"STEMS MAGAZINE",             tag:"MÚSICA ELECTRÓNICA",  desc:"Perfiles y calendarios de la escena electrónica emergente." },
-      { img:"fragmentos", title:"FRAGMENTOS DE LA CONCIENCIA",tag:"PODCAST",             desc:"Historias que quizá nunca ocurrieron. Relatos sonoros de menos de diez minutos." }
+      { img:"mundo",      title:"MUNDO MAGAZINE",             tag:"MISTERIO · CIENCIA",  desc:"Misterio, ciencia, investigación, ufología y documentos, con el espíritu de las revistas impresas de los 90s a 2000s.",
+        links:[
+          { label:"Sitio web", url:"https://mundomag.fyi" }
+        ]
+      },
+      { img:"signal",     title:"SIGNAL MAGAZINE",            tag:"IA GENERATIVA",       desc:"Artículos, perfiles y artefactos sobre IA generativa.",
+        links:[
+          { label:"Sitio web", url:"https://www.signalmag.qd.je" }
+        ]
+      },
+      { img:"stems",      title:"STEMS MAGAZINE",             tag:"MÚSICA ELECTRÓNICA",  desc:"Perfiles y calendarios de la escena electrónica emergente.",
+        links:[
+          { label:"Sitio web", url:"https://stemsmag.fyi" }
+        ]
+      },
+      { img:"fragmentos", title:"FRAGMENTOS DE LA CONCIENCIA",tag:"PODCAST",             desc:"Historias que quizá nunca ocurrieron. Relatos sonoros de menos de diez minutos.",
+        links:[
+          { label:"RSS",             url:"https://rss.com/podcasts/fragmentos-de-la-conciencia/" },
+          { label:"Apple Podcasts",  url:"https://podcasts.apple.com/us/podcast/fragmentos-de-la-conciencia/id1895340339" }
+        ]
+      }
     ];
 
     // Marvelous Productions: producción, diseño e implementación de landing
@@ -837,6 +890,14 @@
         var mediaHtml = p.img
           ? '<img data-img="' + p.img + '" alt="' + p.title + '">'
           : '<div class="universo-fallback" aria-hidden="true"><span>' + (p.short || p.title.charAt(0)) + '</span><em>IMAGEN PRÓXIMAMENTE</em></div>';
+        var linksHtml = "";
+        if (p.links && p.links.length){
+          linksHtml += '<div class="universo-links">';
+          p.links.forEach(function(l){
+            linksHtml += '<a href="' + l.url + '" target="_blank" rel="noopener noreferrer">' + l.label + '</a>';
+          });
+          linksHtml += '</div>';
+        }
         html += ''
           + '<div class="universo-item">'
           +   mediaHtml
@@ -850,6 +911,7 @@
           +       '<h3 class="universo-title">' + p.title + '</h3>'
           +       '<p class="universo-desc">' + p.desc + '</p>'
           +       '<div class="universo-line"></div>'
+          +       linksHtml
           +     '</div>'
           +   '</div>'
           + '</div>';
